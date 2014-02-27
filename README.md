@@ -1,7 +1,12 @@
-# [avant](../../)
+# avant
+#### Cross-browser JavaScript events module
 
-#### JavaScript events module
+## API 
 
-## License: [MIT](http://en.wikipedia.org/wiki/MIT_License)
+### avant.addEvent(node, type, listener)
+### avant.removeEvent(node, type, listener)
+### avant.hasEvent(type, node|tagname?)
 
-Copyright (C) 2013 by [Ryan Van Etten](https://github.com/ryanve)
+## License
+
+[MIT](package.json#L6-L7)
