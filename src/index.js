@@ -4,20 +4,21 @@
 }(this, 'avant', function() {
 
   var api = {}
-    , doc = document
-    , W3C = !!doc.addEventListener
-    , modernLookup = 'onblur' in doc.documentElement
+    , dom = typeof document != 'undefined'
+    , doc = dom && document
+    , w3c = dom && 'addEventListener' in doc
+    , modernLookup = !dom || 'onblur' in doc.documentElement
     , setAtt = 'setAttribute'
     , remAtt = 'removeAttribute'
     , create = 'createElement';
   
-  api['addEvent'] = W3C ? function(node, type, fn) {
+  api['addEvent'] = w3c ? function(node, type, fn) {
     node.addEventListener(type, fn, false); 
   } : function(node, type, fn) { 
     node.attachEvent('on' + type, fn); 
   };
   
-  api['removeEvent'] = W3C ? function(node, type, fn) { 
+  api['removeEvent'] = w3c ? function(node, type, fn) { 
     node.removeEventListener(type, fn, false); 
   } : function(node, type, fn) {
     node.detachEvent('on' + type, fn); 

@@ -1,13 +1,15 @@
 (function(root) {
-  var common = typeof module != 'undefined' && !!module.exports
-    , aok = common ? require('../node_modules/aok') : root.aok
-    , avant = root.avant
-    , html = document.documentElement
-    , body = document.body;
+  var doc = typeof document != 'undefined' && document
+    , aok = doc ? root.aok : require('aok')
+    , avant = doc ? root.avant : require('../src')
+    , html = doc.documentElement
+    , body = doc.body;
     
   aok('methods', !aok.fail(['addEvent', 'removeEvent', 'hasEvent'], function(n) {
     return typeof avant[n] == 'function';
   }));
+  
+  if (!doc) return void aok.log('Basics seem fine. Open test/index.html to run DOM tests.');
 
   aok('hasEvent-1', true === avant.hasEvent('blur'));
   aok('hasEvent-2', true === avant.hasEvent('blur', html));
