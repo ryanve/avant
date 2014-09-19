@@ -12,12 +12,22 @@
     , remAtt = 'removeAttribute'
     , create = 'createElement';
   
+  /**
+   * @param {Element|Document|Window} node
+   * @param {string} type event name (e.g. blur)
+   * @param {Function} fn event listener to add
+   */
   api['listen'] = api['addEvent'] = w3c ? function(node, type, fn) {
     node.addEventListener(type, fn, false); 
   } : function(node, type, fn) { 
     node.attachEvent('on' + type, fn); 
   };
   
+  /**
+   * @param {Element|Document|Window} node
+   * @param {string} type event name (e.g. blur)
+   * @param {Function} fn event listener to remove
+   */
   api['unlisten'] = api['removeEvent'] = w3c ? function(node, type, fn) { 
     node.removeEventListener(type, fn, false); 
   } : function(node, type, fn) {
