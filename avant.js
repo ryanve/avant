@@ -1,10 +1,9 @@
 /*!
- * avant 0.1.0+201402271155
+ * avant 0.2.0+201409191155
  * https://github.com/ryanve/avant
  * MIT License (c) 2014 Ryan Van Etten
  */
-
-(function(root, name, make) {
+!function(root, name, make) {
   if (typeof module != 'undefined' && module['exports']) module['exports'] = make();
   else root[name] = make();
 }(this, 'avant', function() {
@@ -18,13 +17,23 @@
     , remAtt = 'removeAttribute'
     , create = 'createElement';
   
-  api['addEvent'] = w3c ? function(node, type, fn) {
+  /**
+   * @param {Element|Document|Window} node
+   * @param {string} type event name (e.g. blur)
+   * @param {Function} fn event listener to add
+   */
+  api['listen'] = api['addEvent'] = w3c ? function(node, type, fn) {
     node.addEventListener(type, fn, false); 
   } : function(node, type, fn) { 
     node.attachEvent('on' + type, fn); 
   };
   
-  api['removeEvent'] = w3c ? function(node, type, fn) { 
+  /**
+   * @param {Element|Document|Window} node
+   * @param {string} type event name (e.g. blur)
+   * @param {Function} fn event listener to remove
+   */
+  api['unlisten'] = api['removeEvent'] = w3c ? function(node, type, fn) { 
     node.removeEventListener(type, fn, false); 
   } : function(node, type, fn) {
     node.detachEvent('on' + type, fn); 
@@ -37,7 +46,7 @@
    * @link http://github.com/Modernizr/Modernizr/pull/636
    * @link http://bit.ly/event-detection
    */
-  api['hasEvent'] = function(type, node) {
+  api['support'] = api['hasEvent'] = function(type, node) {
     var und, bool = false;
     if (!type) return bool;
     type = 'on' + type;
@@ -56,4 +65,4 @@
   };
     
   return api;
-}));
+});
