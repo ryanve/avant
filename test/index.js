@@ -1,4 +1,4 @@
-(function(root) {
+!function(root) {
   var doc = typeof document != 'undefined' && document
     , aok = doc ? root.aok : require('aok')
     , avant = doc ? root.avant : require('../src')
@@ -21,4 +21,4 @@
   aok('.support(type, elem)', true === avant.support('blur', html));
   aok('.support(badtype)', false === avant.support('!!!'));
   aok('.support(type, i)', 2 === aok.pass(['blur', 'click'], avant.support, body));
-}(this));
+}(this);
